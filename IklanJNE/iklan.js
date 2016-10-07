@@ -1,0 +1,2 @@
+document.getElementById("iklan").innerHTML = '<a href="http://mediaonlinecenter.com"><img src="http://mediaonlinecenter.com/wp-content/uploads/2014/03/BROSUR-BARU.jpg" width="100%" height="autofit"></a>';
+document.getElementById("iklantetap").innerHTML='<a href="tel:085220835877"><img src="http://www.okotoks.ca/data/1/rec_imgs/2435_Call-Us-banner.jpg" width="100%" height="60px"></p>';

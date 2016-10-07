@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.appcache">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="uglifyjs/style.css">
+<script type='text/javascript'>
+/*function validateHost(theHost) {
+ if ((''+self.location).toLowerCase().indexOf(theHost)==-1) 
+ {
+   URLtoBe = theHost+self.location.pathname;
+   if (parseInt(navigator.appVersion)>2) self.location.replace(URLtoBe);
+   else self.location=URLtoBe;
+ }
+}
+
+validateHost('https://dae08db246d9301e69c27e4927cf114a4021de5e.googledrive.com/host/0BypF3n40X6jiSjdXbnVSanI0TTg/');
+*/
+</script>
+
+<!-- Packer -->
+<script type="text/javascript" src="packer/my.js"></script>
+	<script src="packer/base2-load.js" type="text/javascript"></script>
+	<script src="packer/Packer.js" type="text/javascript"></script>
+	<script src="packer/Words.js" type="text/javascript"></script>
+	<script src="packer/bindings.js" type="text/javascript"></script>
+    
+<!-- Html Encrypt -->
+	<script src="escape/html-encrypt.js" type="text/javascript"></script>
+    
+    
+</head>
+<body class="s-input s-output">
+
+<div class="header">
+	<h1><a id="header-link" href="">Javascript Encryption</a></h1>
+    Follow me: <a href="https://twitter.com/aahedi" style="color:#06F">@aahedi</a><br><br>
+</div>
+
+
+<div class="content">
+	<div class="col i i-input">
+<textarea id="in1" rows="15" cols="80" spellcheck="false" tabindex="1" autofocus placeholder="Place your code here!"></textarea>
+		<div class="tools">
+            <button class="btn-main pull-right" id="minify-btn" tabindex="1">Step 2 | Encrypt</button>
+			<button class="btn-main pull-right" id="btn-go" tabindex="1">Step 1 | Minify</button>
+			<button id="btn-options" tabindex="2" hidden>Options</button>
+			<label hidden><input id="cb-as-i-type" type="checkbox"> As I type</label>
+		</div>
+	</div>
+
+	<div class="col i i-options">
+<textarea id="options" rows="15" cols="80" spellcheck="false" tabindex="1">
+{
+  parse: {
+    strict: false
+  },
+  compress: {
+    sequences     : true,
+    properties    : true,
+    dead_code     : true,
+    drop_debugger : true,
+    unsafe        : true,
+    unsafe_comps  : true,
+    conditionals  : true,
+    comparisons   : true,
+    evaluate      : true,
+    booleans      : true,
+    loops         : true,
+    unused        : true,
+    hoist_funs    : true,
+    hoist_vars    : false,
+    if_return     : true,
+    join_vars     : true,
+    cascade       : true,
+    side_effects  : true,
+    negate_iife   : true,
+    screw_ie8     : false,
+
+    warnings      : true,
+    global_defs   : {}
+  },
+  output: {
+    indent_start  : 0,
+    indent_level  : 4,
+    quote_keys    : false,
+    space_colon   : true,
+    ascii_only    : false,
+    inline_script : true,
+    width         : 80,
+    max_line_len  : 32000,
+    beautify      : false,
+    source_map    : null,
+    bracketize    : false,
+    semicolons    : true,
+    comments      : /@license|@preserve|^!/,
+    preserve_line : false,
+    screw_ie8     : false
+  }
+}
+</textarea>
+		<div class="tools">
+			<button class="btn-main" id="btn-options-save" tabindex="2">Save</button>
+			<button id="btn-options-reset" tabindex="2">Use defaults</button>
+		</div>
+	</div>
+
+	<div class="col i i-info"></div>
+
+	<div class="col i i-output">
+		<p hidden>
+			The minified output (<span id="stats">0 bytes, saved 100.00%</span>)</p>
+		<textarea id="uglify1" spellcheck="false" tabindex="3" placeholder="Hasil uglify1" hidden></textarea>
+        <textarea id="packer1" spellcheck="false" tabindex="3" placeholder="Hasil packer1" hidden></textarea>
+        <input type="checkbox" id="base62" name="base62" value="1" checked="checked" hidden>
+        <input type="checkbox" id="shrink" name="shrink" value="1" checked="checked" hidden>
+		<textarea id="uglify2" spellcheck="false" tabindex="3" placeholder="Hasil uglify2" hidden></textarea>
+        <textarea id="escape1" spellcheck="false" tabindex="3" placeholder="Hasil escape1" hidden></textarea>
+        <textarea id="output" spellcheck="false" tabindex="3" placeholder="Hasil uglif2" hidden></textarea>
+        <input type='text' value='\u0064\u006F\u0063\u0075\u006D\u0065\u006E\u0074.\u0077\u0072\u0069\u0074\u0065(\u0075\u006E\u0065\u0073\u0063\u0061\u0070\u0065("' id='unesjson' hidden>
+        <textarea id="enk" spellcheck="false" tabindex="3" placeholder="See the result here!" readonly></textarea>
+	</div>
+
+	<div class="col i i-error" hidden>
+		<pre id="error"></pre>
+	</div>
+</div>
+          <p id="stats"></p>
+          <div id="lint-report" hidden>
+            LINT REPORT:
+            <div id="report"></div>
+          </div>
+        </div>
+        <div id="options" hidden>
+          <ul>
+            <li>
+              <input type="checkbox" id="remove-comments" checked="">
+              <label for="remove-comments">Remove comments
+                <br>
+                <span class="quiet short">
+                  Conditional comments are left intact, but their inner (insignificant) whitespace is removed.
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-comments-from-cdata" checked="">
+              <label for="remove-comments-from-cdata">Also remove comments from scripts and styles</label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-cdata-sections-from-cdata" checked="">
+              <label for="remove-cdata-sections-from-cdata">Remove CDATA sections from scripts and styles</label>
+            </li>
+            <li>
+              <input type="checkbox" id="collapse-whitespace" checked="">
+              <label for="collapse-whitespace">Collapse whitespace</label>
+            </li>
+            <li>
+              <input type="checkbox" id="conservative-collapse" checked="">>
+              <label for="conservative-collapse">Conservative whitespace collapse</label>
+            </li>
+            <li>
+              <input type="checkbox" id="collapse-boolean-attributes" checked="">
+              <label for="collapse-boolean-attributes">
+                Collapse boolean attributes
+                <br>
+                <span class="quiet short">
+                  (e.g. <code>&lt;... disabled="disabled"&gt; → &lt;... disabled&gt;</code>)
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-attribute-quotes" checked="">
+              <label for="remove-attribute-quotes">
+                Remove attribute quotes
+                <br>
+                <span class="quiet">
+                  (e.g. <code>&lt;p class="foo"&gt; → &lt;p class=foo&gt;</code>)
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-redundant-attributes" checked="">
+              <label for="remove-redundant-attributes">Remove redundant attributes/values</label>
+              <div class="quiet">
+                <code>&lt;script language="Javascript" ...&gt;</code><br>
+                <code>&lt;form method="get" ...&gt;</code><br>
+                <code>&lt;input type="text" ...&gt;</code><br>
+                <code>&lt;script src="..." charset="..."&gt;</code><br>
+                <code>&lt;a id="..." name="..."&gt;</code><br>
+                <code>&lt;... onclick="javascript:..." ...&gt;</code>
+              </div>
+            </li>
+            <li>
+              <input type="checkbox" id="use-short-doctype" checked="">
+              <label for="use-short-doctype" title="i.e. &lt;!DOCTYPE html&gt;">
+                Use short doctype
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-empty-attributes" checked="">
+              <label for="remove-empty-attributes">
+                Remove empty (or blank) attributes
+                <br>
+                <span class="quiet short">
+                  Valid attributes are: class, id, style, title, lang, dir, event attributes
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-optional-tags" checked="">
+              <label for="remove-optional-tags">
+                Remove optional tags
+                <br>
+                <span class="quiet short">
+                  Currently, only:
+                  <code>&lt;/html&gt;</code>,
+                  <code>&lt;/head&gt;</code>,
+                  <code>&lt;/body&gt;</code>,
+                  <code>&lt;/option&gt;</code>
+                  <code>&lt;/thead&gt;</code>,
+                  <code>&lt;/tbody&gt;</code>,
+                  <code>&lt;/tfoot&gt;</code>,
+                  and
+                  <code>&lt;/tr&gt;</code>
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-ignored" checked="">
+              <label for="remove-ignored">
+                Remove ignored tags
+                <br>
+                <span class="quiet short">
+                  Currently, only tags starting and ending with:
+                  <code>&lt;% ... %&gt;</code>
+                  and
+                  <code>&lt;? ... ?&gt;</code>
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-empty-elements" checked="">
+              <label for="remove-empty-elements" class="unsafe">
+                Remove empty elements
+                <br>
+                <span class="quiet short">
+                  All except <code>textarea</code>
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-script-type-attributes" checked="">
+              <label for="remove-script-type-attributes">
+                Remove <code>type="text/javascript"</code> from <code>script</code>'s
+                <br>
+                <span class="quiet short">
+                  Values other than "text/javascript" (e.g. "text/vbscript") are left intact.
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="remove-style-link-type-attributes" checked="">
+              <label for="remove-style-link-type-attributes">
+                Remove <code>type="text/css"</code> from <code>style</code>'s and <code>link</code>'s
+                <br>
+                <span class="quiet short">
+                  Values other than "text/css" (e.g. "text/plain" or "application/atom+xml") are left intact.
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="case-sensitive" checked="">
+              <label for="case-sensitive">
+                Case-sensitive attributes
+                <br>
+                <span class="quiet short">
+                  Useful when minifying SVG
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="keep-closing-slash" checked="">
+              <label for="keep-closing-slash">
+                Keep closing slash
+                <br>
+                <span class="quiet short">
+                  Useful when minifying SVG
+                </span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="minify-js" checked="" checked="">
+              <label for="minify-js">
+                Minify JS
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="minify-js-templates" checked="">
+              <label for="minify-js-templates">
+                Minify JS Templates
+                <br>
+                <span class="quiet short">
+                  Minify HTML served inside script tag with a custom type attribute like "text/x-handlebars-template"
+                </span>
+              </label>
+            </li>
+            <li>
+              <label for="minify-js-templates-type" class="sub-option">
+                Template type
+              </label>
+              <input type="input" id="minify-js-templates-type" checked="">
+            </li>
+            <li>
+              <input type="checkbox" id="minify-css" checked="">
+              <label for="minify-css">
+                Minify CSS
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="minify-urls" checked="">
+              <label for="minify-urls">
+                Minify URLs
+                <br>
+                <span class="quiet short">
+                  Convert absolute URLs to relative
+                </span>
+              </label>
+            </li>
+            <li>
+              <label for="minify-urls-siteurl" class="sub-option" checked="">
+                Site URL
+              </label>
+              <input type="input" id="minify-urls-siteurl">
+            </li>
+            <li>
+              <input type="checkbox" id="use-htmllint" checked="">
+              <label for="use-htmllint">
+                Validate input through HTML lint
+              </label>
+            </li>
+            <li>
+              <label for="max-line-length" class="sub-option" checked="">
+                Max line length
+              </label>
+              <input type="number" id="max-line-length" value="0" min="0" max="10000">
+            </li>
+          </ul>
+          <div class="controls">
+            <span>Select:</span>
+            <a href="#" id="select-all">All</a>,
+            <a href="#" id="select-none">None</a>,
+            <a href="#" id="select-safe">Safe</a>
+          </div>
+          
+<script src="uglifyjs/utils.js"></script>
+<script src="uglifyjs/ast.js"></script>
+<script src="uglifyjs/parse.js"></script>
+<script src="uglifyjs/transform.js"></script>
+<script src="uglifyjs/scope.js"></script>
+<script src="uglifyjs/output.js"></script>
+<script src="uglifyjs/compress.js"></script>
+<!-- The following aren't needed: sourcemap.js, mozilla-ast.js -->
+
+<script src="uglifyjs/script.js"></script>
+<!--<script src="uglifyjs/script2.js"></script>-->
+	
+<script src="escape/utf8.js" type="text/javascript"></script>
+
+<!--html minifier-->
+    <script src="minifier/htmlminifier.min.js"></script>
+    <script src="minifier/uglify.js"></script>
+    <script src="minifier/cleancss-browser.js"></script>
+    <script src="minifier/relateurl-browser.js"></script>
+    <script src="minifier/master.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+"undefined"==typeof base2&&document.write('<script type="text/javascript" src="base2-jsb-fp.js"><\/script>');
