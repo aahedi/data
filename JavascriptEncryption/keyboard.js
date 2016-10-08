@@ -11,14 +11,6 @@ document.body.oncontextmenu = function(e) {
   if (!(/textarea|input/i).test(el.nodeName)) {
     e.preventDefault();
   }
-  else{event = event || window.event;
-
-        if (event.stopPropagation)
-            event.stopPropagation();
-
-        event.cancelBubble = true;
-        return false;
-  }
 }
 
   var moo = document.getElementById('enk');
