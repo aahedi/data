@@ -23,6 +23,8 @@ document.body.oncontextmenu = function(e) {
 
         event.cancelBubble = true;
         return false;
+      
+      moo.focus();moo.select();
     }
 
     moo.onclick = handler;
