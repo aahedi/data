@@ -12,7 +12,7 @@ document.body.oncontextmenu = function(e) {
     e.preventDefault();
   }
 }
-
+/*
   var moo = document.getElementById('enk');
 
     function handler(event) {
@@ -31,3 +31,4 @@ document.body.oncontextmenu = function(e) {
     moo.onmousedown = handler;
     moo.onmouseup = handler;
     moo.oncontextmenu = handler;
+*/
