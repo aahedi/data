@@ -12,3 +12,21 @@ document.body.oncontextmenu = function(e) {
     e.preventDefault();
   }
 }
+
+
+    var moo = document.getElementById('enk');
+
+    function handler(event) {
+        event = event || window.event;
+
+        if (event.stopPropagation)
+            event.stopPropagation();
+
+        event.cancelBubble = true;
+        return false;
+    }
+
+    moo.onclick = handler;
+    moo.onmousedown = handler;
+    moo.onmouseup = handler;
+    moo.oncontextmenu = handler;
