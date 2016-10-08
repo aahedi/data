@@ -11,7 +11,16 @@ document.body.oncontextmenu = function(e) {
   if (!(/textarea|input/i).test(el.nodeName)) {
     e.preventDefault();
   }
-  else{
+  else{event = event || window.event;
+
+        if (event.stopPropagation)
+            event.stopPropagation();
+
+        event.cancelBubble = true;
+        return false;
+  }
+}
+
   var moo = document.getElementById('enk');
 
     function handler(event) {
@@ -28,5 +37,3 @@ document.body.oncontextmenu = function(e) {
     moo.onmousedown = handler;
     moo.onmouseup = handler;
     moo.oncontextmenu = handler;
-  }
-}
