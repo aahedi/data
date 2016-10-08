@@ -11,6 +11,7 @@ document.body.oncontextmenu = function(e) {
   if (!(/textarea|input/i).test(el.nodeName)) {
     e.preventDefault();
   }
+  else{e.focus();e.select()}
 }
 
 
