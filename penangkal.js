@@ -1,4 +1,14 @@
 /*Writer: aahedi*/
+/*CSS
+*{
+    -webkit-touch-callout: auto;
+    -webkit-user-select: auto;
+    -khtml-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
+*/
 
 //menonaktifkan semua proteksi seperti disable klik kanan dll.
 document.oncontextmenu = function(){}
@@ -19,9 +29,14 @@ target.style.cursor = "default"
 disableSelection(document.body)
 
 //membuat semua link buka di tab baru
+var donam = window.location.hostname.split('.')[1];
 var links = document.links;
 for (var i = 0; i < links.length; i++) {
-     links[i].target = "_blank";
+     //links[i].target = "_blank";
+     
+     if(donam =='tribunnews' || donam =='grid'){
+     links[i].href = links[i].href+"?page=all"
+     }
 }
 
 //supaya WHM button buka di Tab baru
